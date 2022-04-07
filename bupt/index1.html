@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html style="font-size: 128px;" lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+  <title>请假外出、返校权限查询通行码</title>
+
+
+  <script type="text/javascript">
+    window.onload = function () {
+      var show = document.getElementById("real_time");
+      var time = new Date();  // 程序计时的月从0开始取值后+1
+      var m = time.getMonth() + 1;
+      var t = time.getFullYear() + "-" + m + "-"
+        + time.getDate() + " " + time.getHours() + ":"
+        + time.getMinutes() + ":" + time.getSeconds();
+      show.innerHTML = t;
+    };
+  </script>
+
+
+  <script>function IEVersion() {
+      var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+      var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+      var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+      var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+      if (isIE) {
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        if (fIEVersion == 7) {
+          return 7;
+        } else if (fIEVersion == 8) {
+          return 8;
+        } else if (fIEVersion == 9) {
+          return 9;
+        } else if (fIEVersion == 10) {
+          return 10;
+        } else {
+          return 6;//IE版本<=7
+        }
+      } else if (isEdge) {
+        return 'edge';//edge
+      } else if (isIE11) {
+        return 11; //IE11
+      } else {
+        return false;//不是ie浏览器
+      }
+    }
+
+    if (window.location.href.indexOf("opendebug") !== -1) {
+      console.log("调试模式");
+    } else {
+      if (window.location.href.indexOf("icce") !== -1 && IEVersion()) { //IE跳转
+        window.location.href = '/v2/static/html/download.html';
+      } else if (IEVersion()) { // 判断ie版本 低于11的跳转
+        if (IEVersion() != 'edge' && IEVersion() < 11) {
+          setTimeout(function () {
+            window.location.href = '/v2/static/html/download.html';
+          }, 300);
+        }
+      } else {
+        setTimeout(function () {
+          if (!history.pushState) {
+            window.location.href = '/v2/static/html/download.html';
+          }
+        }, 300);
+      }
+    }</script>
+  <style>
+    .frame_load_img {
+      display: inline-block;
+      width: 50px;
+      animation: haha1 1.5s linear infinite;
+      -webkit-animation: haha1 1s linear infinite;
+    }
+
+    .frame-loader {
+      position: fixed;
+      z-index: 999;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+
+    @-webkit-keyframes haha1 {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      25% {
+        -webkit-transform: rotate(90deg);
+      }
+
+      50% {
+        -webkit-transform: rotate(180deg);
+      }
+
+      75% {
+        -webkit-transform: rotate(270deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    #__vconsole .vc-content {
+      line-height: 12px;
+    }
+  </style>
+  <link
+    href="%E8%AF%B7%E5%81%87%E5%A4%96%E5%87%BA%E3%80%81%E8%BF%94%E6%A0%A1%E6%9D%83%E9%99%90%E6%9F%A5%E8%AF%A2%E9%80%9A%E8%A1%8C%E7%A0%81_files/chunk-vendors.css"
+    rel="stylesheet">
+  <link
+    href="%E8%AF%B7%E5%81%87%E5%A4%96%E5%87%BA%E3%80%81%E8%BF%94%E6%A0%A1%E6%9D%83%E9%99%90%E6%9F%A5%E8%AF%A2%E9%80%9A%E8%A1%8C%E7%A0%81_files/app.css"
+    rel="stylesheet">
+  <link rel="shortcut icon" href="https://imgservice.bupt.edu.cn/all/1/3333.jpg">
+  <link rel="stylesheet" type="text/css"
+    href="%E8%AF%B7%E5%81%87%E5%A4%96%E5%87%BA%E3%80%81%E8%BF%94%E6%A0%A1%E6%9D%83%E9%99%90%E6%9F%A5%E8%AF%A2%E9%80%9A%E8%A1%8C%E7%A0%81_files/chunk-0b7ba362.css">
+</head>
+
+<body class="">
+  <div id="wxform">
+  <div class="forms">
+    <div style="height: 0px;"></div>
+    <div class="toptabla">
+      <div class="toptabla_con">
+        <div class="formsTop_left"><img
+            src="data:image/png;base64,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"
+            alt="">
+          <p class="">当前部门: 计算机学院（国家示范性软件学院）</p>
+        </div>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAYCAYAAACMcW/9AAAB4ElEQVRYR83VO0sDQRAA4Nm9LfMbBBEsBC1EEFGUJblcOEihP8Je8YnYiPhErf0Rlja729j4C6wUE1+o+AAtlMiaHTmJcsYkbi6R3FVX7Mx+Nzs7RwAAhBCCEOIG73F8KKU+UUqNI+JuHIEh03UAPUDE4ZhD34mUcg8AxmIPVUoNIOJhzKH7JABKKScAYDuOWES8SiQSnZ/QEnYaADZihj1mjI1wzm+/oaUxtUQIWYwJNo+IQ+l0+jrw/ICWKrsAAMstxt5prdt833/7cvyCthpLCDlzHGcgOO5wsSpCW4g9oZS6yWTyvPxEq0JbgL0wxnR5nvdSqe1qQoMApdQMIq7/c8/eaK3bwz1ZV0W/Fiul5hFx5Z+wuWKxOJTJZG5q5f+zoqE5OwcAq03G5hhjg+UXJ9LRh4Oa3Aa3hUKhI5vNvtp8vHVFm9wGl4yxXs75gw2y4sC3CWywsnmtdb/v+/c2e9Uc+DYJlFKTiLhlsza05hIAul3Xfa4z7vcvtJ4EQohZQsiaTUzwxwGAvlQq9WizPtJ4qpXYEpsv9eRTFGTkHi3fTEo5BQCbVRAXANAT5bjD+eq+9dUqUgV7ZIxJep53F7WSDV+mShsLIUYppSPGmASl9NRxnB3OeaFRZBD/ATVSvUcGtzefAAAAAElFTkSuQmCC" 
+        alt="" class="toptabla_img">
+        <!---->
+      </div>
+    </div>
+
+    <div class="forms">
+      <div style="height: 0px;"></div>
+      <div class="toptabla">
+        <div class="toptabla_con">
+          <div class="formsTop_left"><img
+              src="data:image/png;base64,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"
+              alt="">
+            <p class="">请假外出、返校权限查询</p>
+          </div>
+          <!---->
+        </div>
+      </div>
+      
+      <div>
+        <div class="m_formList">
+          <!---->
+          <div>
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">
+                姓名
+              </span>
+              <!---->
+            </div>
+            <!---->
+            <div class="plugin-allbox dplugin-mobile-rinput">
+              <div data-key="User_3" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                <div class="dplugin-mobile dplugin-doneplugin dplugin-mobile-dinput"><span
+                    class="doneplugin-value doneplugin-value-userview"
+                    style="font-size: 14px; font-family: 微软雅黑; font-weight: normal; font-style: normal; color: rgb(96, 98, 102); text-decoration: none; text-align: center; line-height: 15px; letter-spacing: 0px;">
+                    王实
+                  </span></div>
+              </div>
+              <!---->
+            </div>
+          </div>
+
+          <!---->
+          <div>
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">
+                照片
+              </span>
+              <!---->
+            </div>
+            <!---->
+            <!---->
+            <div class="plugin-allbox" plugin="[object Object]">
+              <div data-key="Qrcode_11" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; width: 100%; text-align: center; height: 100%; overflow-x: auto;">
+                <div class="dplugin-mobile"><img src="请假外出、返校权限查询通行码_files/222.jpg" height="150" width="110"
+                    style="height: 150px; width: 110px;" /> </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div class="mobile_pluginnames_hide">
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">动态图</span>
+              <!---->
+            </div>
+            <!---->
+            <div class="plugin-allbox">
+              <div data-key="Image_36" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; text-align: left;">
+                <div class="dplugin-mobile dplugin-mobile-dImage dImageview"><img
+                    src="%E8%AF%B7%E5%81%87%E5%A4%96%E5%87%BA%E3%80%81%E8%BF%94%E6%A0%A1%E6%9D%83%E9%99%90%E6%9F%A5%E8%AF%A2%E9%80%9A%E8%A1%8C%E7%A0%81_files/3916676.gif"
+                    style="width: 100%; height: 100%;"></div>
+                <!---->
+                <!---->
+              </div>
+              <!---->
+            </div>
+          </div>
+          <div>
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">
+                状态码
+              </span>
+              <!---->
+            </div>
+            <!---->
+            <div class="plugin-allbox" plugin="[object Object]">
+              <div data-key="Qrcode_11" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; width: 100%; text-align: center; height: 100%; overflow-x: auto;">
+                <div class="dplugin-mobile"><img src="请假外出、返校权限查询通行码_files/1598430470533.JPEG" height="150" width="150"
+                    style="height: 150px; width: 150px;" /> </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+          <div>
+            <!---->
+            <div class="plugin-allbox dplugin-mobile-rinput">
+              <div data-key="Input_12" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                <div class="dplugin-mobile dplugin-mobile-dinput dinput-vie dplugin-mobile-dinput-focusalert"
+                  style="font-size: 18px; font-family: 微软雅黑; font-weight: bold; font-style: normal; color: red; text-decoration: none; text-align: center; line-height: 20px; letter-spacing: 0px;">
+                  <span
+                    style="font-size: 18px; font-family: 微软雅黑; font-weight: bold; font-style: normal; color: green; text-decoration: none; text-align: center; line-height: 20px; letter-spacing: 0px;">允许出校</span>
+                </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+
+          <div>
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">
+                学工号
+              </span>
+              <!---->
+            </div>
+            <!---->
+            <div class="plugin-allbox dplugin-mobile-rinput">
+              <div data-key="User_5" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                <div class="dplugin-mobile dplugin-doneplugin dplugin-mobile-dinput"><span
+                    class="doneplugin-value doneplugin-value-userview"
+                    style="font-size: 14px; font-family: 微软雅黑; font-weight: normal; font-style: normal; color: rgb(96, 98, 102); text-decoration: none; text-align: center; line-height: 15px; letter-spacing: 0px;">
+                    2020111507
+                  </span></div>
+              </div>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div>
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">
+                出入校时间
+              </span>
+              <!---->
+            </div>
+            <!---->
+            <div class="plugin-allbox">
+              <div data-key="Calendar_15" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                <div class="dplugin-mobile dplugin-mobile-dCalendar dCalendar-vie"
+                  style="font-size: 14px; font-family: 微软雅黑; font-weight: normal; font-style: normal; color: rgb(96, 98, 102); text-decoration: none; text-align: center; line-height: 20px; letter-spacing: 0px;">
+                  <span id="real_time"
+                    style="font-size: 14px; font-family: 微软雅黑; font-weight: normal; font-style: normal; color: rgb(96, 98, 102); text-decoration: none; text-align: center; line-height: 20px; letter-spacing: 0px;">2020-08-26
+                    17:13:38</span>
+                </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+            <!---->
+          <div>
+            <div class="pluginnames"><span
+                style="color: rgb(135, 135, 135); font-size: 14px; font-family: 微软雅黑; line-height: 22px;">
+                学院
+              </span>
+              <!---->
+            </div>
+            <!---->
+            <div class="plugin-allbox dplugin-mobile-rinput">
+              <div data-key="User_22" class="dplugin-box"
+                style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                <div class="dplugin-mobile dplugin-doneplugin dplugin-mobile-dinput"><span
+                    class="doneplugin-value doneplugin-value-userview"
+                    style="font-size: 14px; font-family: 微软雅黑; font-weight: normal; font-style: normal; color: rgb(96, 98, 102); text-decoration: none; text-align: center; line-height: 15px; letter-spacing: 0px;">
+                    计算机学院（国家示范性软件学院）
+                  </span></div>
+              </div>
+              <!---->
+            </div>
+          </div>
+          <!---->
+          <div style="display: none;">
+            <ul>
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <!---->
+              <li><span>动态转化：</span>
+                <div data-key="Conversion_17" class="dplugin-box"
+                  style="margin-top: 0px; margin-bottom: 0px; text-align: left;">
+                  <!---->
+                </div>
+              </li>
+              <!---->
+              <!---->
+              <li><span>数据源：</span>
+                <div data-key="DataSource_23" class="dplugin-box"
+                  style="margin-top: 0px; margin-bottom: 0px; text-align: left;" plugin="[object Object]">
+                  <div>
+                    <div class="el-dialog__wrapper" style="display: none;">
+                      <div role="dialog" aria-modal="true" aria-label="同步数据"
+                        class="el-dialog el-dialog--center rTbaleDialog" style="margin-top: 15vh; width: 90%;">
+                        <div class="el-dialog__header"><span class="el-dialog__title">同步数据</span>
+                          <!---->
+                        </div>
+                        <!---->
+                        <div class="el-dialog__footer"><span class="dialog-footer"><button type="button"
+                              class="el-button el-button--default">
+                              <!---->
+                              <!----><span>取 消</span>
+                            </button> <button type="button" class="el-button el-button--primary">
+                              <!---->
+                              <!----><span>确 定</span>
+                            </button></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class="wxformbtn m_start_btn"><button class="draftdiv active">更多</button>
+        <div class="wxformbtn_center">
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+    <div class="processimg"><img
+        src="data:image/png;base64,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"
+        alt="" class="imgbtn">
+      <div class="svg"><img
+          src="%E8%AF%B7%E5%81%87%E5%A4%96%E5%87%BA%E3%80%81%E8%BF%94%E6%A0%A1%E6%9D%83%E9%99%90%E6%9F%A5%E8%AF%A2%E9%80%9A%E8%A1%8C%E7%A0%81_files/svg.png"
+          alt=""></div>
+    </div>
+    <div class="showBpmn_class" style="display: none;"></div>
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <div class="el-dialog__wrapper" style="display: none;">
+      <div role="dialog" aria-modal="true" aria-label="添加人员" class="el-dialog el-dialog--center dialog_search_user"
+        style="margin-top: 15vh; width: 300px;">
+        <div class="el-dialog__header"><span class="el-dialog__title">添加人员</span><button type="button"
+            aria-label="Close" class="el-dialog__headerbtn"><i
+              class="el-dialog__close el-icon el-icon-close"></i></button></div>
+        <!---->
+        <div class="el-dialog__footer"><span class="dialog-footer"><button type="button"
+              class="el-button el-button--default">
+              <!---->
+              <!----><span>取 消</span>
+            </button> <button type="button" class="el-button el-button--primary">
+              <!---->
+              <!----><span>确 定</span>
+            </button></span></div>
+      </div>
+    </div>
+    <div class="el-dialog__wrapper" style="display: none;">
+      <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog el-dialog--center dialog_agent_depart"
+        style="margin-top: 15vh; width: 300px;">
+        <div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close"
+            class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div>
+        <!---->
+        <div class="el-dialog__footer"><span class="dialog-footer"><button type="button"
+              class="el-button el-button--default">
+              <!---->
+              <!----><span>取 消</span>
+            </button> <button type="button" class="el-button el-button--primary">
+              <!---->
+              <!----><span>确 定</span>
+            </button></span></div>
+      </div>
+    </div>
+    <!---->
+    <div class="el-dialog__wrapper" style="display: none;">
+      <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top: 15vh; width: 80%;">
+        <div class="el-dialog__header"><span class="el-dialog__title"></span>
+          <!---->
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <div>
+      <div class="el-dialog__wrapper" style="display: none;">
+        <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog submit_layer"
+          style="margin-top: 15vh;">
+          <div class="el-dialog__header"><span class="el-dialog__title"></span>
+            <!---->
+          </div>
+          <!---->
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div><iframe id="printCasLogout" style="display: none;"></iframe>
+  <script>if (window.location.href.indexOf("debug=1") !== -1) {
+      var jsScript = document.createElement("script");
+      jsScript.src = "/v2/static/js/common/vconsole.min.js";
+      jsScript.type = "text/javascript";
+      jsScript.async = false;
+      jsScript.onload = function () {
+        var vConsole = new VConsole();
+      };
+
+      document.getElementsByTagName("body")[0].appendChild(jsScript);
+    }</script>
+  <div id="progress_loading" style="display: none;">
+    <div style="width: 0%;"></div>
+  </div>
+  <div class="el-loading-mask is-fullscreen" style="z-index: 2000; display: none;">
+    <div class="el-loading-spinner"><svg viewBox="25 25 50 50" class="circular">
+        <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+      </svg>
+      <!---->
+    </div>
+  </div>
+</body>
+
+</html>
